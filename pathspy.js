@@ -87,6 +87,16 @@ async function pathspy(baseURL) {
 
             const resultLine = `[${status}] ${fullURL} (${ms} ms)`;
 	    if(resultLine.includes("200") && status === 200){
+              readline.clearLine(process.stdout, 0);
+              readline.cursorTo(process.stdout, 0);
+              console.log(`\r${color}${resultLine}${colors.reset}`);
+            }else if(resultLine.includes("403") && status === 403){
+              readline.clearLine(process.stdout, 0);
+              readline.cursorTo(process.stdout, 0);
+              console.log(`\r${color}${resultLine}${colors.reset}`);
+            }else if(resultLine.includes("500") && status === 500){
+              readline.clearLine(process.stdout, 0);
+              readline.cursorTo(process.stdout, 0);
               console.log(`\r${color}${resultLine}${colors.reset}`);
             }else {
              readline.clearLine(process.stdout, 0);
