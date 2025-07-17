@@ -1,4 +1,5 @@
 const axios = require("axios");
+const readline = require('readline');
 const fs = require("fs");
 
 // Argument parsing
@@ -71,7 +72,7 @@ async function pathspy(baseURL) {
 
         try {
             const res = await axios.get(fullURL, {
-                timeout: 5000,
+                timeout: 8000,
                 validateStatus: () => true
             });
 
@@ -85,7 +86,13 @@ async function pathspy(baseURL) {
             else if (status === 500) color = colors.red;
 
             const resultLine = `[${status}] ${fullURL} (${ms} ms)`;
-            console.log(`${color}${resultLine}${colors.reset}`);
+	    if(resultLine.includes("200") && status === 200){
+              console.log(`\r${color}${resultLine}${colors.reset}`);
+            }else {
+             readline.clearLine(process.stdout, 0);
+             readline.cursorTo(process.stdout, 0);
+	     process.stdout.write(`\r${color}${resultLine}${colors.reset}`)
+            }
 
             if (status === 200) save200List.push(resultLine);
             saveAllList.push(resultLine);
