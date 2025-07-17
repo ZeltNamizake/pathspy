@@ -98,7 +98,7 @@ async function pathspy(baseURL) {
             saveAllList.push(resultLine);
         } catch (err) {
             const errLine = `[ERR] ${fullURL} → ${err.code || err.message}`;
-            console.log(`${colors.red}${errLine}${colors.reset}`);
+            console.log(`\r${colors.red}${errLine}${colors.reset}`);
             saveAllList.push(errLine);
         }
     }
